@@ -2,19 +2,10 @@
 #
 # Table name: signs
 #
-#  id               :integer          not null, primary key
-#  phrase           :text
-#  letter_order     :text
-#  created_at       :datetime
-#  updated_at       :datetime
-#  effects          :integer
-#  color            :string(255)
-#  background_color :string(255)
-#  fade_time        :float
-#
-# Indexes
-#
-#  index_signs_on_effects  (effects)
+#  id           :integer          not null, primary key
+#  letter_order :text
+#  created_at   :timestamp withou
+#  updated_at   :timestamp withou
 #
 
 require 'spec_helper'

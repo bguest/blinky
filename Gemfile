@@ -15,11 +15,11 @@ gem 'pi_piper', :git => 'https://github.com/bguest/pi_piper.git', :branch => 'de
 #gem 'color',              '~>1.4' # Color
 gem 'color', :github => 'bguest/color', :branch => 'bug-nil-equivalent'
 gem 'bitmask_attributes', '~>1.0' # Bitmask
-gem 'annotate', "~>2.6.0"
+gem 'annotate', "~>2.6"
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+ 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

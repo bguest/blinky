@@ -1,0 +1,35 @@
+ol.breadcrumb
+  li=link_to 'Sequences', sequences_path
+  li.active #{@sequence.name}
+
+h1 #{@sequence.name} Instructions
+
+table.table
+  thead
+    tr
+      th Order
+      th Phrase
+      th Duration
+      th Action
+  tbody
+    - @instructions.each do |ins|
+      = form_for ins do |f|
+        tr
+          td= f.number_field :number, class: 'form-control'
+          td= f.text_field :phrase, class: 'form-control'
+          td= f.number_field :duration, class: 'form-control', step: 'any'
+          td
+            = f.submit "Update", class:'btn btn-primary'
+            = link_to 'Edit', edit_instruction_path(ins), class:'btn btn-default'
+            = link_to 'Delete', instruction_path(ins), method:'delete', class: 'btn btn-danger'
+
+    = form_for @new_instruction do |f|
+      tr
+        = f.hidden_field :sequence_id, value: @sequence.id
+        td= f.number_field :number, class: 'form-control'
+        td= f.text_field :phrase, class:'form-control'
+        td= f.number_field :duration, class: 'form-control', step: 'any'
+        td= f.submit "Add Instruction ", class:'btn btn-primary'
+
+=link_to 'Start Sequence', start_sequence_path(@sequence), :method => :put, class: 'btn btn-success'
+=link_to 'Stop Sequence', stop_sequence_path(@sequence), :method => :put, class: 'btn btn-danger'

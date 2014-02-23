@@ -15,20 +15,17 @@
 #  index_effects_on_instruction_id  (instruction_id)
 #
 
-class SolidColor < Effect
+class Effect < ActiveRecord::Base
+  belongs_to :instruction
+  serialize :data, Hash
 
-  def fields
-    %i(color background_color)
+  after_initialize :init
+
+  def init
+    self.data ||= {}
   end
 
-
-  def run(options)
-    sign = options[:sign]
-    color = Color::RGB.from_html(data['color'])
-    bg_color = Color::RGB.from_html(data['background_color'])
-    segs = sign.letters.collect(&:segments).flatten
-    segs.each do |seg|
-      seg.color= (seg.on? ? color : bg_color)
-    end
+  def fields
+    []
   end
 end

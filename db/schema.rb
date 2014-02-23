@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 7) do
+ActiveRecord::Schema.define(version: 6) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "effects", force: :cascade do |t|
+    t.integer  "instruction_id"
+    t.string   "type"
+    t.integer  "number"
+    t.string   "data"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "effects", ["instruction_id"], name: "index_effects_on_instruction_id", using: :btree
+
+  create_table "instructions", force: :cascade do |t|
+    t.integer  "sequence_id"
+    t.integer  "number"
+    t.text     "phrase"
+    t.float    "duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "instructions", ["sequence_id"], name: "index_instructions_on_sequence_id", using: :btree
 
   create_table "letters", force: :cascade do |t|
     t.integer  "number"
@@ -30,23 +52,28 @@ ActiveRecord::Schema.define(version: 7) do
   create_table "segments", force: :cascade do |t|
     t.integer "length"
     t.integer "number"
+    t.string  "color"
     t.integer "letter_id"
   end
 
   add_index "segments", ["letter_id"], name: "index_segments_on_letter_id", using: :btree
 
+  create_table "sequences", force: :cascade do |t|
+    t.integer  "sign_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sequences", ["sign_id"], name: "index_sequences_on_sign_id", using: :btree
+
   create_table "signs", force: :cascade do |t|
-    t.text     "phrase"
     t.text     "letter_order"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "effects"
-    t.string   "color"
-    t.string   "background_color"
-    t.float    "fade_time"
-    t.float    "tempo"
   end
 
-  add_index "signs", ["effects"], name: "index_signs_on_effects", using: :btree
-
+  add_foreign_key "effects", "instructions"
+  add_foreign_key "instructions", "sequences"
+  add_foreign_key "sequences", "signs"
 end

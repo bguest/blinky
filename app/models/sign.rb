@@ -2,34 +2,20 @@
 #
 # Table name: signs
 #
-#  id               :integer          not null, primary key
-#  phrase           :text
-#  letter_order     :text
-#  created_at       :datetime
-#  updated_at       :datetime
-#  effects          :integer
-#  color            :string(255)
-#  background_color :string(255)
-#  fade_time        :float
-#
-# Indexes
-#
-#  index_signs_on_effects  (effects)
+#  id           :integer          not null, primary key
+#  letter_order :text
+#  created_at   :timestamp withou
+#  updated_at   :timestamp withou
 #
 
 class Sign < ActiveRecord::Base
   after_initialize :init
   has_many :letters, :dependent => :destroy, :autosave => true
+  has_many :sequence, :dependent => :destroy
 
   serialize :letter_order, Array
-  serialize :color, ColorSerializer
-  serialize :background_color, ColorSerializer
-  bitmask :effects, :as => [:scrolling, :solid_color, :hue_fade]
 
   def init
-    # Set Defaults
-    self.color ||= Color::RGB::White
-    self.background_color ||= Color::RGB::Black
 
     # Get letters without a set number
     new_letters = letters.select{|l| l.number.nil? }
@@ -126,7 +112,6 @@ class Sign < ActiveRecord::Base
   def push
     ok = self.save
     LedString.new.add_sign(self) if ok && LedString.new?
-    Effects::Manager.run(self) if ok
     ok
   end
 

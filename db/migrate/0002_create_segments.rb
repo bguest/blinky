@@ -3,6 +3,7 @@ class CreateSegments < ActiveRecord::Migration
     create_table :segments do |t|
       t.integer :length
       t.integer :number
+      t.string :color
       t.belongs_to :letter, index: true
     end
   end

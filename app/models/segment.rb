@@ -5,6 +5,7 @@
 #  id        :integer          not null, primary key
 #  length    :integer
 #  number    :integer
+#  color     :character varyin
 #  letter_id :integer
 #
 # Indexes
@@ -15,6 +16,8 @@
 class Segment < ActiveRecord::Base
   attr_accessor :led_string, :on
 
+  serialize :color, ColorSerializer
+
   belongs_to :letter
 
   after_initialize :init
@@ -24,13 +27,8 @@ class Segment < ActiveRecord::Base
     self.led_string ||= LedString
   end
 
-  def color
-    @color
-    #led_string.color_at(start)
-  end
-
   def color=(color)
-    @color = color
+    super
     led_string.set_color color, range
   end
 

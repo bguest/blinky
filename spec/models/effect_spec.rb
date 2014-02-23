@@ -15,20 +15,8 @@
 #  index_effects_on_instruction_id  (instruction_id)
 #
 
-class SolidColor < Effect
+require 'rails_helper'
 
-  def fields
-    %i(color background_color)
-  end
-
-
-  def run(options)
-    sign = options[:sign]
-    color = Color::RGB.from_html(data['color'])
-    bg_color = Color::RGB.from_html(data['background_color'])
-    segs = sign.letters.collect(&:segments).flatten
-    segs.each do |seg|
-      seg.color= (seg.on? ? color : bg_color)
-    end
-  end
+RSpec.describe Effect, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

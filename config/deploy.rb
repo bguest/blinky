@@ -10,7 +10,8 @@ set :scm, :git
 #set :deploy_via, :remote_cache
 set :repository,  "."
 set :local_repository, "."
-set :branch, "master"
+#set :branch, "master"
+set :branch, "sequence"
 #set :rvm_ruby_string, 'ruby-2.0.0-p247'
 #set :rvm_bin_path, "/usr/local/rvm/bin"
 #set :git_shallow_clone, 1  # Won't work for branch other than master

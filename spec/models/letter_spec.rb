@@ -6,11 +6,12 @@
 #  number        :integer
 #  segment_order :text
 #  sign_id       :integer
-#  created_at    :datetime
-#  updated_at    :datetime
+#  created_at    :timestamp withou
+#  updated_at    :timestamp withou
 #
 # Indexes
 #
+#  index_letters_on_number   (number)
 #  index_letters_on_sign_id  (sign_id)
 #
 

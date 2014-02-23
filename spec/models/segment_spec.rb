@@ -5,6 +5,7 @@
 #  id        :integer          not null, primary key
 #  length    :integer
 #  number    :integer
+#  color     :character varyin
 #  letter_id :integer
 #
 # Indexes

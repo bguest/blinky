@@ -1,0 +1,33 @@
+ol.breadcrumb
+  li=link_to 'Sequences', sequences_path
+  li= link_to "#{@instruction.sequence.name}", edit_sequence_path(@instruction.sequence_id)
+  li.active #{@instruction.phrase}
+
+h1 #{@instruction.phrase} Effects
+
+table.table
+  thead
+    tr
+      th Order
+      th Type
+      th Data
+      th Action
+  tbody
+    - @effects.each do |eff|
+      = form_for eff, as: :effect, url: effect_path(eff) do |f|
+        tr
+          td= f.number_field :number, class: 'form-control'
+          td= f.select :type, options_for_select([:Scrolling, :HueFade, :SolidColor], eff.type), {}, :class => 'form-control'
+          td= eff.data
+          td
+            = f.submit "Update", class:'btn btn-primary'
+            = link_to 'Edit', edit_effect_path(eff), class:'btn btn-default'
+            = link_to 'Delete', effect_path(eff), method:'delete', class: 'btn btn-danger'
+
+    = form_for @new_effect do |f|
+      tr
+        = f.hidden_field :instruction_id, value: @instruction.id
+        td= f.number_field :number, class: 'form-control'
+        td= f.select :type, options_for_select([:Scrolling, :HueFade, :SolidColor]), {}, :class => 'form-control'
+        td=
+        td= f.submit "Add Instruction ", class:'btn btn-primary'

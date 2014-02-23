@@ -1,0 +1,19 @@
+ol.breadcrumb
+  li=link_to 'Sequences', sequences_path
+  li=link_to "#{@effect.instruction.sequence.name}", edit_sequence_path(@effect.instruction.sequence_id)
+  li=link_to "#{@effect.instruction.phrase}", edit_instruction_path(@effect.instruction_id)
+  li.active #{@effect.type}
+
+h1 Edit Effect
+
+h3= @effect.type
+
+=form_for @effect, as: :effect, url: effect_path(@effect) do |f|
+  -@effect.fields.each do |field|
+    =f.label field
+    -if field.to_s.include?('color')
+      =f.color_field "data[#{field}]", value: @effect.data[field.to_s]
+    -else
+      =f.text_field "data[#{field}]", value: @effect.data[field.to_s]
+
+  =f.submit 'Update'

@@ -1,11 +1,15 @@
 Blinky::Application.routes.draw do
 
-  resources :sign, :only => [:index, :update] do
-    collection do
-      put 'phrase'
+  resources :sign, :only => [:index]
+
+  resources :sequences do
+    member do
       put 'stop'
+      put 'start'
     end
   end
+  resources :instructions
+  resources :effects
 
   resources :letters do
     member do
@@ -17,17 +21,6 @@ Blinky::Application.routes.draw do
   end
 
   resources :segments, :only => :update
-
-  resources :blinker, :only => [:index] do
-    collection do
-      put 'start'
-      put 'stop'
-      put 'red'
-      put 'green'
-      put 'blue'
-      put 'color'
-    end
-  end
 
   root 'sign#index'
 end

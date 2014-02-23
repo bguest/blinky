@@ -1,0 +1,20 @@
+h1 Sequences
+
+table.table
+  thead: tr
+    th Name
+    th 
+  tbody
+    - @sequences.each do |seq|
+      = form_for seq do |f|
+        tr
+          td= f.text_field :name, class: 'form-control'
+          td
+            = f.submit "Update", class:'btn btn-primary'
+            = link_to 'Edit', edit_sequence_path(seq), class:'btn btn-default'
+            = link_to 'Delete', sequence_path(seq), method:'delete', class: 'btn btn-danger'
+
+    = form_for @new_sequence do |f|
+      tr
+        td= f.text_field :name, class:'form-control'
+        td= f.submit "Add Sequence", class:'btn btn-primary'
