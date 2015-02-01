@@ -77,9 +77,21 @@ class WS2801
     @pixels.collect(&:to_a).flatten
   end
 
+  def to_s
+    @pixels.collect{|p| p.to_a.join(',')}.join("\n")
+  end
+
   def push!
-    array = self.to_a
-    to_piper(array)
+    #array = self.to_a
+    #to_piper(array)
+
+    to_file(self.to_s)
+  end
+
+  def to_file(string)
+    File.atomic_write('/Users/InTents/Documents/Processing/Segment16/read_file/blinky.txt') do |f|
+      f.write(string)
+    end
   end
 
   def to_piper(array)
