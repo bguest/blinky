@@ -17,7 +17,7 @@ describe LettersController do
 
     it 'should be able to create new letter' do
       post :create, params
-      Letter.last.segment_order.should == [0,1,2,3,4,5,6,7,8,10,11,12,13,14,15]
+      expect(Letter.last.segment_order).to eq([0,1,2,3,4,5,6,7,8,10,11,12,13,14,15])
     end
 
     it 'should flash error if cant save' do
@@ -25,7 +25,7 @@ describe LettersController do
       s.stubs(:save).returns(false)
       controller.stubs(:sign).returns(s)
       post :create, params
-      flash[:error].should == 'Letter could not be created'
+      expect(flash[:error]).to eq('Letter could not be created')
     end
 
   end
@@ -38,13 +38,13 @@ describe LettersController do
 
     it 'should update segment order' do
       patch :update, @params
-      Letter.find(@letter.id).segment_order.should == [0,1,2,3,4,5]
+      expect(Letter.find(@letter.id).segment_order).to eq([0,1,2,3,4,5])
     end
 
     it 'should flash error if save is unsuccessful' do
       Letter.any_instance.stubs(:save).returns(false)
       patch :update, @params
-      flash[:error].should == "Error updating letter number #{@letter.id}"
+      expect(flash[:error]).to eq("Error updating letter number #{@letter.id}")
     end
 
   end
@@ -57,15 +57,15 @@ describe LettersController do
     end
 
     it 'should assign letter' do
-      assigns(:letter).should == @letter
+      expect(assigns(:letter)).to eq(@letter)
     end
 
     it 'should assign segments' do
-      assigns(:segments).should == @letter.segments.order(:number)
+      expect(assigns(:segments)).to eq(@letter.segments.order(:number))
     end
 
     it 'should assign segment lengths' do
-      assigns(:segment_lengths).should == @letter.segment_lengths
+      expect(assigns(:segment_lengths)).to eq(@letter.segment_lengths)
     end
   end
 
@@ -84,7 +84,7 @@ describe LettersController do
       s.stubs(:save).returns false
       controller.stubs(:sign).returns s
       delete :destroy, id:@letter.id
-      flash[:error].should == "Problem deleting letter #{@letter.id}"
+      expect(flash[:error]).to eq("Problem deleting letter #{@letter.id}")
     end
   end
 
@@ -113,6 +113,7 @@ describe LettersController do
     before :each do
       @letter = Letter.new(id:'88', segment_order:[0,1,2])
       Letter.stubs(:find).with('88').returns(@letter)
+      Segment.any_instance.stubs(:save).returns(true)
       params = {id: '88', segment_lengths: '[3,4,5]'}
       put :segment_lengths, params
     end
@@ -122,9 +123,9 @@ describe LettersController do
     end
 
     it 'should update letter segment lengths' do
-      @letter.segment_number(0).length.should == 3
-      @letter.segment_number(1).length.should == 4
-      @letter.segment_number(2).length.should == 5
+      expect(@letter.segment_number(0).length).to eq(3)
+      expect(@letter.segment_number(1).length).to eq(4)
+      expect(@letter.segment_number(2).length).to eq(5)
     end
   end
 

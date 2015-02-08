@@ -33,12 +33,12 @@ describe Sign do
   it 'should be able to have letters' do
     letter = Letter.new
     sign.letters << letter
-    sign.letters.first.should == letter
+    expect(sign.letters.first).to eq(letter)
   end
 
   it 'should have color attribute' do
     sign.color = Color::RGB::Red
-    sign.color.should == Color::RGB::Red
+    expect(sign.color).to eq(Color::RGB::Red)
   end
 
   describe '#add_letters' do
@@ -46,18 +46,18 @@ describe Sign do
     let(:l2){Letter.new}
 
     before {sign.add_letters(l1,l2)}
-    it {l1.number.should == 0}
-    it {l2.number.should == 1}
-    it {sign.letters.size.should == 2}
+    it{expect(l1.number).to eq(0)}
+    it{expect(l2.number).to eq(1)}
+    it{expect(sign.letters.size).to eq(2)}
 
     it "should have the correct letter order" do
-      sign.letter_order.should == [0,1]
+      expect(sign.letter_order).to eq([0,1])
     end
   end
 
   describe '#fade_time' do
     it 'should default to 72 seconds' do
-      sign.fade_time.should == 72
+      expect(sign.fade_time).to eq(72)
     end
   end
 
@@ -65,11 +65,11 @@ describe Sign do
 
     describe 'sets defaults' do
       it 'should have default background color' do
-        Sign.new.background_color.should == Color::RGB::Black
+        expect(Sign.new.background_color).to eq(Color::RGB::Black)
       end
 
       it 'should have default color' do
-        Sign.new.color.should == Color::RGB::White
+        expect(Sign.new.color).to eq(Color::RGB::White)
       end
     end
 
@@ -79,9 +79,9 @@ describe Sign do
       before do
         @sign = Sign.new(letters:[l1,l2])
       end
-      it{l1.number.should == 0}
-      it{l2.number.should == 1}
-      it{@sign.letter_order.should == [0,1]}
+      it{expect(l1.number).to eq(0)}
+      it{expect(l2.number).to eq(1)}
+      it{expect(@sign.letter_order).to eq([0,1])}
     end
   end
 
@@ -89,29 +89,29 @@ describe Sign do
 
     it 'should not overwrite existing order' do
       s = Sign.new(letter_order:[1,2])
-      s.letter_order.should == [1,2]
+      expect(s.letter_order).to eq([1,2])
     end
 
     it 'should be able to store letter order' do
       l = Sign.new
       l.letter_order = [1,2,4,5]
-      l.letter_order.should == [1,2,4,5]
+      expect(l.letter_order).to eq([1,2,4,5])
     end
   end
 
   describe '#ordered_segments' do
     context 'should return segments in order specified by segment_order' do
       let(:ordered){Sign.new(letter_order:[2,5,4,1,3]).ordered_letters}
-      it{ordered[0].number.should == 2}
-      it{ordered[2].number.should == 4}
-      it{ordered[4].number.should == 3}
+      it{expect(ordered[0].number).to eq(2)}
+      it{expect(ordered[2].number).to eq(4)}
+      it{expect(ordered[4].number).to eq(3)}
     end
   end
 
   describe '#phrase' do
     it 'should store phrase' do
       sign.phrase = 'Hello there Guy'
-      sign.phrase.should == 'HELLO THERE GUY'
+      expect(sign.phrase).to eq('HELLO THERE GUY')
     end
   end
 
@@ -126,12 +126,12 @@ describe Sign do
       sign.remove_letters(l1,l3)
     end
 
-    it{l2.number.should == 1}
-    it{l4.number.should == 3}
-    it{sign.letters.size.should == 2}
+    it{expect(l2.number).to eq(1)}
+    it{expect(l4.number).to eq(3)}
+    it{expect(sign.letters.size).to eq(2)}
 
     it "should have the correct letter order" do
-      sign.letter_order.should == [3,1]
+      expect(sign.letter_order).to eq([3,1])
     end
 
   end
@@ -145,10 +145,10 @@ describe Sign do
         s
       end
       it 'should have the right number of letters' do
-        sign.letters.size.should == 4
+        expect(sign.letters.size).to eq(4)
       end
       (1..4).to_a.each do |n|
-        it{sign.letter_number(n).number.should == n}
+        it{expect(sign.letter_number(n).number).to eq(n)}
       end
     end
 
@@ -159,10 +159,10 @@ describe Sign do
         s
       end
       it 'should have the right number of letters' do
-        sign.letters.size.should == 2
+        expect(sign.letters.size).to eq(2)
       end
       [1,4].each do |n|
-        it{sign.letter_number(n).number.should == n}
+        it{expect(sign.letter_number(n).number).to eq(n)}
       end
       [2,3].each{|n| it{ expect(sign.letter_number(n)).to be_nil}}
     end
@@ -170,7 +170,7 @@ describe Sign do
 
   describe '#tempo' do
     it 'should default to 60' do
-      Sign.new.tempo.should == 60
+      expect(Sign.new.tempo).to eq(60)
     end
   end
 
@@ -180,7 +180,7 @@ describe Sign do
       LedString.new.add_sign(sign)
       Effects::Manager.expects(:run).with(sign)
       sign.expects(:save).returns true
-      sign.push.should == true
+      expect(sign.push).to eq(true)
     end
   end
 

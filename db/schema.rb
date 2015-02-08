@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 7) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "letters", force: true do |t|
+  create_table "letters", force: :cascade do |t|
     t.integer  "number"
     t.text     "segment_order"
     t.integer  "sign_id"
@@ -24,9 +24,10 @@ ActiveRecord::Schema.define(version: 7) do
     t.datetime "updated_at"
   end
 
+  add_index "letters", ["number"], name: "index_letters_on_number", using: :btree
   add_index "letters", ["sign_id"], name: "index_letters_on_sign_id", using: :btree
 
-  create_table "segments", force: true do |t|
+  create_table "segments", force: :cascade do |t|
     t.integer "length"
     t.integer "number"
     t.integer "letter_id"
@@ -34,7 +35,7 @@ ActiveRecord::Schema.define(version: 7) do
 
   add_index "segments", ["letter_id"], name: "index_segments_on_letter_id", using: :btree
 
-  create_table "signs", force: true do |t|
+  create_table "signs", force: :cascade do |t|
     t.text     "phrase"
     t.text     "letter_order"
     t.datetime "created_at"

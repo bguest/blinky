@@ -133,13 +133,13 @@ describe Letter do
 
       it 'should recive color for correct segments' do
         [0,1,2,7,8,13,14,15].each do |n|
-          @letter.segments[n].on?.should be_true
+          @letter.segments[n].on?.should be true
         end
       end
 
       it 'should recieve no color for correct segments ' do
         ((0..15).to_a - [0,1,2,7,8,13,14,15]).each do |n|
-          @letter.segments[n].off?.should be_true
+          @letter.segments[n].off?.should be true
         end
       end
 

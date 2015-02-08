@@ -15,7 +15,7 @@ describe SegmentsController do
 
     it 'should update segment length' do
       put :update, new_params
-      @segment.length.should == 11
+      expect(@segment.length).to eq(11)
     end
 
     it 'should redirect to letter edit' do
@@ -26,7 +26,7 @@ describe SegmentsController do
     it "should let user know if can't update segment" do
       @segment.stubs(:update_attributes).returns false
       put :update, new_params
-      flash[:error].should == 'Error updating segment.'
+      expect(flash[:error]).to eq('Error updating segment.')
     end
 
   end

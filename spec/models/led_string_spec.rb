@@ -65,11 +65,11 @@ describe LedString do
 
   describe '#new?' do
 
-    it{string.new.new?.should be_true}
+    it{string.new.new?.should be true}
 
     it 'should not return true if segments have been added' do
       string.add_segments(s1)
-      string.new?.should be_false
+      string.new?.should be false
     end
 
   end

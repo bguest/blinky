@@ -35,7 +35,7 @@ class Segment < ActiveRecord::Base
   end
 
   def on?
-    on
+    on == true
   end
 
   def on!

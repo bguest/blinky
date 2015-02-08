@@ -10,16 +10,15 @@ gem 'uglifier',     '~>2.4'       # Use Uglifier as compressor for JavaScript as
 gem 'coffee-rails', '~>4.0'       # Use CoffeeScript for .js.coffee assets and views
 gem 'jquery-rails', '~>3.1'       # Use jquery as the JavaScript library
 gem 'jbuilder',     '~>2.0'       # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'turbolinks',   '~>2.2'       # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'anjlab-bootstrap-rails', '~> 3.0', :require => 'bootstrap-rails' # Bootstrap
 gem 'pi_piper', :git => 'https://github.com/bguest/pi_piper.git', :branch => 'develop'
-gem 'color',              '~>1.4' # Color
+#gem 'color',              '~>1.4' # Color
+gem 'color', :github => 'bguest/color', :branch => 'bug-nil-equivalent'
 gem 'bitmask_attributes', '~>1.0' # Bitmask
 gem 'annotate', "~>2.6.0"
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -27,13 +26,15 @@ group :doc do
 end
 
 group :test, :development do
-  gem 'rspec-rails', '~> 2.4'
+  gem 'pry-byebug', '~>3.0'
+  gem 'rspec-rails', '~> 3.1'
   gem "mocha", :require => false
-  gem 'shoulda-matchers'
   gem 'simplecov'
 end
 
 group :test do
+  gem 'minitest', '~>5.5'
+  gem 'shoulda-matchers', '~>2.5'
   gem 'zeus', '0.13.4.pre2'
   gem 'coveralls', require: false
 end

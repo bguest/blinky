@@ -70,7 +70,7 @@ describe Effects::Manager do
       Manager.run(sign)
       Manager.stop
       Manager.dead_thread.join
-      Manager.dead_thread.alive?.should be_false
+      Manager.dead_thread.alive?.should be false
     end
   end
 end

@@ -16,7 +16,7 @@ Blinky::Application.configure do
   # config.assets.css_compressor = :sass
 
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
-  config.serve_static_assets = false    # Disable Rails's static asset server (Apache or nginx will already do this).
+  config.serve_static_files = false     # Disable Rails's static asset server (Apache or nginx will already do this).
   config.cache_classes = true           # Code is not reloaded between requests.
   config.assets.compile = false         # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.digest = true           # Generate digests for assets URLs.

@@ -29,17 +29,17 @@ describe Segment do
 
   describe '#on/off' do
     it 'should be not be on after init' do
-      expect(s1.on?).to be_false
+      expect(s1.on?).to be false
     end
 
     it 'should be off after init' do
-      expect(s1.off?).to be_true
+      expect(s1.off?).to be true
     end
 
     it 'should should turn on and off' do
       s1.on = true
-      s1.off!.off?.should be_true
-      s1.on!.on?.should be_true
+      s1.off!.off?.should be true
+      s1.on!.on?.should be true
     end
   end
 
