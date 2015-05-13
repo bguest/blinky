@@ -14,7 +14,7 @@ table.table
       = form_for l do |f|
         tr
           td= l.number
-          td= f.text_field :segment_order, class:'form-control'
+          td= text_field_tag 'letter[segment_order]', l.segment_order.to_s, class:'form-control'
           td
             = f.submit "Update", class:'btn btn-primary'
             = link_to 'Edit', edit_letter_path(l), class:'btn btn-default'
@@ -23,7 +23,9 @@ table.table
     = form_for @new_letter do |nl|
       tr
         td= @new_letter.number
-        td= nl.text_field :segment_order, class:'form-control'
+        td= text_field_tag 'letter[segment_order]', @new_letter.segment_order.to_s, class:'form-control'
         td= nl.submit "Add Letter", class:'btn btn-primary'
 
 = link_to "Push update to sign", reload_letters_path, :method => :put, class: 'btn btn-warning'
+
+p="[0,1,6,13,15,14,9,2,3,12,11,4,5,10,7,8]"

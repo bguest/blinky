@@ -37,6 +37,8 @@
 # | /       |       \ |
 # |/        |        \|
 #  -- 14 --- -- 15 ---
+#
+# NOTE: These are the segment numbers
 
 class Letter < ActiveRecord::Base
   after_initialize :init
@@ -105,6 +107,7 @@ class Letter < ActiveRecord::Base
   }
 
   def init
+    #self.segment_order = [0,1,6,13,15,14,9,2,3,12,11,4,5,10,7,8] if segment_order.empty?
     self.segment_order = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] if segment_order.empty?
 
     # Ensure letter has segment for each segment order

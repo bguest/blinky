@@ -6,7 +6,7 @@ h1 Letters Setup
 table.table
   thead: tr
     th Letter #
-    th Segment Lengths
+    th Segment Lengths*
   tbody
     =form_tag(segment_lengths_letter_path, method: :put) do
       tr
@@ -14,9 +14,12 @@ table.table
         td=text_field_tag :segment_lengths, @segment_lengths.to_json, class:'form-control'
         td=submit_tag "Update", class:'btn btn-warning'
 
+p * As segments occur along string
+p="[2, 2, 4, 4, 2, 2, 4, 4, 2, 2, 4, 4, 2, 2, 2, 2]"
+
 table.table
   thead: tr
-    th Segment #
+    th Segment # **
     th Segment Length
   tbody
     -@segments.each do |s|
@@ -26,3 +29,6 @@ table.table
           td=f.text_field :length, class:'form-control'
           td
             =f.submit "Update", class:'btn btn-primary'
+
+|** As defined by segment diagram
+
