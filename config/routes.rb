@@ -29,7 +29,7 @@ Blinky::Application.routes.draw do
     end
   end
 
- root 'blinker#index'
+  root 'sign#index'
 end
 
 # The priority is based upon order of creation: first created -> highest priority.
