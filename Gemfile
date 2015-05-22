@@ -50,5 +50,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
+  gem 'capistrano-scm-copy', '~>0.5.0'
+  gem 'capistrano-scm-gitcopy', '~>0.0.8'
 end
 

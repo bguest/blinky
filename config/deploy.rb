@@ -5,7 +5,8 @@ set :repo_url, 'git@github.com:bguest/blinky.git'
 
 set :deploy_to, '/var/www/blinky'
 set :scm, :git
-#set :deploy_via, :copy
+#set :scm, :gitcopy
+#set :scm, :copy
 #set :deploy_via, :remote_cache
 set :repository,  "."
 set :local_repository, "."
