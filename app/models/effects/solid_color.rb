@@ -21,6 +21,22 @@ class SolidColor < Effect
     %i(color background_color)
   end
 
+  def color
+    data['color']
+  end
+
+  def background_color
+    data['background_color']
+  end
+
+  def color=(clr)
+    data['color'] = clr
+  end
+
+  def background_color=(clr)
+    data['background_color'] = clr
+  end
+
 
   def run(options)
     sign = options[:sign]

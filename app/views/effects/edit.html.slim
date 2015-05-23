@@ -12,7 +12,7 @@ h3= @effect.type
   -@effect.fields.each do |field|
     =f.label field
     -if field.to_s.include?('color')
-      =f.color_field "data[#{field}]", value: @effect.data[field.to_s]
+      =f.color_field field, value: @effect.data[field.to_s]
     -else
       =f.text_field "data[#{field}]", value: @effect.data[field.to_s]
 
